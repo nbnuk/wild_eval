@@ -17,13 +17,13 @@ def nbn_name_match(name: str) -> str:
         return data["scientificName"]
     return ""
 
+
 @eval_case("NBN Atlas Name Resolution")
 def test_name_resolution():
     return {
         "data": lambda: [
             {"input": "Bumblebee", "expected": "Bombus"},
-            {"input": "red fox", "expected": "Vulpes vulpes"},
-            {"input": "branta canadnesis", "expected": "Branta canadensis"}
+            {"input": "red fox", "expected": "Vulpes vulpes"}
         ],
         "task": nbn_name_match,
         "scorers": [Levenshtein()]

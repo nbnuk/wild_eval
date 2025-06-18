@@ -15,4 +15,8 @@ if __name__ == "__main__":
             print(f"Output: {r['output']}")
             for scorer, score in r['scores'].items():
                 print(f"{scorer}: {score:.2f}")
+                extras = r['details'].get(scorer, {})
+                for key, val in extras.items():
+                    if key != "score":
+                        print(f"  {key}: {val}")
             print("---")

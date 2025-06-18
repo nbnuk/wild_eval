@@ -15,9 +15,15 @@ class EvalCase:
                 'input': item['input'],
                 'expected': item['expected'],
                 'output': output,
-                'scores': {
-                    scorer.__class__.__name__: scorer(output, item['expected'])
+                "scores": {
+                    scorer.__class__.__name__: extract_score(scored)
                     for scorer in self.scorers
+                    if (scored := scorer(output, item["expected"])) is not None
+                },
+                "details": {
+                    scorer.__class__.__name__: extract_full(scored)
+                    for scorer in self.scorers
+                    if (scored := scorer(output, item["expected"])) is not None
                 }
             }
             results.append(result)
@@ -37,3 +43,17 @@ def eval_case(name):
         registered_evals.append(case)
         return fn
     return decorator
+
+def extract_score(result):
+    if isinstance(result, (int, float)):
+        return float(result)
+    elif isinstance(result, dict) and "score" in result:
+        return float(result["score"])
+    return 0.0  # fallback
+
+def extract_full(result):
+    if isinstance(result, (int, float)):
+        return {"score": float(result)}
+    elif isinstance(result, dict):
+        return result
+    return {"score": 0.0}
