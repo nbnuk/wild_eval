@@ -18,6 +18,16 @@ class Levenshtein:
             }
             
 
+class GazetteerMatchScorer:
+    def __init__(self, gazetteer: list[str]):
+        self.gazetteer = gazetteer
+
+    def __call__(self, output, expected):
+        leaked = [place for place in self.gazetteer if place.lower() in output.lower()]
+        return {
+            "score": 0 if leaked else 1,
+            "metadata": {"leaked_places": leaked}
+        }
 
 
 # class StringSimilarity:
