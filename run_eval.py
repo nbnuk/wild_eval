@@ -1,9 +1,25 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+import pathlib
+import importlib.util
 from eval_framework import registered_evals
-import my_eval  # auto-registers
+
+def import_eval_files_from(folder: str = "evals"):
+    """Dynamically import all test_*.py files in the given folder."""
+    path = pathlib.Path(folder)
+    if not path.exists():
+        print(f"⚠️  Eval folder '{folder}' does not exist.")
+        return
+
+    for py_file in path.glob("test_*.py"):
+        module_name = py_file.stem
+        module_path = py_file.resolve()
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+# --- Discover and import eval test files ---
+import_eval_files_from("evals")
 
 if __name__ == "__main__":
     for case in registered_evals:
