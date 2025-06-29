@@ -1,11 +1,11 @@
-import openai
+
 import spacy
 
 import requests
 from eval_framework import eval_case
 from scorers import Levenshtein, GazetteerMatchScorer
 
-openai.api_key = "YOUR_API_KEY"
+
 nlp = spacy.load("en_core_web_sm")
 
 @eval_case("Simple Taxon Name Fix")
@@ -54,28 +54,7 @@ def test_redact_places():
         "scorers": [GazetteerMatchScorer(["Abersoch", "Bangor", "Llandudno", "Dolgellau", "Snowdonia"])]
     }
     
-# def redact_with_openai(text):
-#     prompt = f"""Redact any place names or geographic locations in this text by replacing them with [REDACTED]. Only redact location names.
 
-# Text: \"{text}\"
-# """
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=[{"role": "user", "content": prompt}],
-#         temperature=0
-#     )
-#     return response.choices[0].message.content.strip()
-
-# @eval_case("Redact Places with OpenAI")
-# def test_redact_places_with_openai():
-#     return {
-#         "data": lambda: [
-#             {"input": "Observed near Dolgellau in Snowdonia National Park.", "expected": "Observed near [REDACTED] in [REDACTED] National Park."},
-#             {"input": "Seen on a path near Abersoch", "expected": "Seen on a path near [REDACTED]"}
-#         ],
-#         "task": redact_with_openai,
-#         "scorers": [GazetteerMatchScorer(["Abersoch", "Bangor", "Llandudno", "Dolgellau", "Snowdonia"])]
-#     }
     
 def redact_with_spacy(text):
     doc = nlp(text)

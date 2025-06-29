@@ -19,6 +19,9 @@ class Levenshtein:
             
 
 class GazetteerMatchScorer:
+    '''
+    This simple scorer confirms whether location names were removed, but does not consider how the rest of the sentence was handled.
+    '''
     def __init__(self, gazetteer: list[str]):
         self.gazetteer = gazetteer
 
@@ -30,13 +33,3 @@ class GazetteerMatchScorer:
         }
 
 
-# class StringSimilarity:
-#     def __init__(self, field: str):
-#         self.field = field
-#         self.sim = AEStringSimilarity()
-
-#     def __call__(self, output: dict, expected: dict) -> float:
-#         return self.sim.eval(
-#             output.get(self.field, ""),
-#             expected.get(self.field, "")
-#         ).score
