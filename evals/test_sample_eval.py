@@ -3,7 +3,8 @@ import spacy
 
 import requests
 from eval_framework import eval_case
-from scorers import Levenshtein, GazetteerMatchScorer
+from autoevals import Levenshtein
+from scorers import GazetteerMatchScorer
 
 
 nlp = spacy.load("en_core_web_sm")

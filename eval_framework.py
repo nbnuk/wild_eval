@@ -49,6 +49,8 @@ def extract_score(result):
         return float(result)
     elif isinstance(result, dict) and "score" in result:
         return float(result["score"])
+    elif hasattr(result, "score"):
+        return float(result.score)
     return 0.0  # fallback
 
 def extract_full(result):
@@ -56,4 +58,6 @@ def extract_full(result):
         return {"score": float(result)}
     elif isinstance(result, dict):
         return result
+    elif hasattr(result, "score"):
+        return {"score": float(result.score), "metadata": getattr(result, "metadata", {})}
     return {"score": 0.0}
