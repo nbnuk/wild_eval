@@ -19,33 +19,33 @@ def import_eval_files_from(folder: str = "evals"):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
-def run_evaluations(filter_pattern=None, case_name=None):
+def run_evaluations(filter_pattern=None, eval_case_name=None):
     """Run evaluations with optional filtering."""
     if not registered_evals:
-        print("⚠️  No evaluations found. Make sure you have test_*.py files in the evals/ directory.")
+        print("⚠️  No evaluations found. Make sure you have eval_*.py files in the evals/ directory.")
         return
 
     # Filter evaluations if specified
-    cases_to_run = []
-    for case in registered_evals:
-        if case_name and case.name.lower() != case_name.lower():
+    eval_cases_to_run = []
+    for eval_case in registered_evals:
+        if eval_case_name and eval_case.name.lower() != eval_case_name.lower():
             continue
-        if filter_pattern and filter_pattern.lower() not in case.name.lower():
+        if filter_pattern and filter_pattern.lower() not in eval_case.name.lower():
             continue
-        cases_to_run.append(case)
+        eval_cases_to_run.append(eval_case)
 
-    if not cases_to_run:
-        if case_name:
-            print(f"⚠️  No evaluation found with name '{case_name}'")
+    if not eval_cases_to_run:
+        if eval_case_name:
+            print(f"⚠️  No evaluation found with name '{eval_case_name}'")
         elif filter_pattern:
             print(f"⚠️  No evaluations found matching '{filter_pattern}'")
         else:
             print("⚠️  No evaluations to run")
         return
 
-    for case in cases_to_run:
-        print(f"\n🔍 Running: {case.name}")
-        results = case.run()
+    for eval_case in eval_cases_to_run:
+        print(f"\n🔍 Running: {eval_case.name}")
+        results = eval_case.run()
         for r in results:
             print(f"Input: {r['input']}")
             print(f"Expected: {r['expected']}")
@@ -61,14 +61,14 @@ def run_evaluations(filter_pattern=None, case_name=None):
 def list_evaluations():
     """List all available evaluations."""
     if not registered_evals:
-        print("⚠️  No evaluations found. Make sure you have test_*.py files in the evals/ directory.")
+        print("⚠️  No evaluations found. Make sure you have eval_*.py files in the evals/ directory.")
         return
 
     print("📋 Available evaluations:")
-    for i, case in enumerate(registered_evals, 1):
-        print(f"  {i}. {case.name}")
+    for i, eval_case in enumerate(registered_evals, 1):
+        print(f"  {i}. {eval_case.name}")
 
-# --- Discover and import eval test files ---
+# --- Discover and import eval files ---
 import_eval_files_from("evals")
 
 if __name__ == "__main__":
@@ -108,4 +108,4 @@ Examples:
     if args.list:
         list_evaluations()
     else:
-        run_evaluations(filter_pattern=args.filter, case_name=args.name)
+        run_evaluations(filter_pattern=args.filter, eval_case_name=args.name)
