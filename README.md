@@ -127,7 +127,7 @@ The framework is designed to work seamlessly with [autoevals](https://github.com
 
 
 #### Built-in Biodiversity Scorers
-The framework may eventually include domain-specific scorers tailored to biodiversity tasks. For now, we’ve implemented a very simple example focused on location redaction, primarily to demonstrate the concept. 
+The framework could eventually include domain-specific scorers tailored to biodiversity tasks. For now, we’ve implemented a very simple example focused on location redaction, primarily to demonstrate the concept. 
 
 - **`GazetteerMatchScorer`**: Checks if specific location names are present/absent in text (useful for location redaction tasks)
 
