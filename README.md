@@ -55,7 +55,7 @@ python run_eval.py
 
 Scorers are functions that evaluate how well your AI task's output matches the expected result. They return a score (typically between 0-1 or 0-100) and optional metadata.
 
-### Why Scorers Matter
+### Why scorers matter
 
 Good evaluation metrics are crucial for:
 - **Comparing different AI models** on the same task
@@ -116,7 +116,7 @@ Each eval has three components:
 
 ## Available Scorers
 
-### Autoevals Scorers
+### Autoevals scorers
 The framework is designed to work seamlessly with [autoevals](https://github.com/braintrustdata/autoevals), a comprehensive library of evaluation metrics. Autoevals provides many sophisticated scorers out of the box:
 
 - **String Similarity**: `autoevals.Levenshtein`, `autoevals.StringSimilarity`
@@ -126,13 +126,13 @@ The framework is designed to work seamlessly with [autoevals](https://github.com
 - Check the [autoevals documentation](https://github.com/braintrustdata/autoevals) for the full list
 
 
-#### Built-in Biodiversity Scorers
+#### Built-in biodiversity scorers
 The framework could eventually include domain-specific scorers tailored to biodiversity tasks. For now, we’ve implemented a very simple example focused on location redaction, primarily to demonstrate the concept. 
 
 - **`GazetteerMatchScorer`**: Checks if specific location names are present/absent in text (useful for location redaction tasks)
 
 
-### Creating custom Scorers
+### Creating custom scorers
 You can create your own scorers by implementing a callable that returns a score:
 
 ```python
@@ -148,7 +148,7 @@ class MyCustomScorer:
 
 ## Configuration
 
-### API Keys
+### API keys
 
 For evaluations that use external APIs (like OpenAI), set your API keys:
 
@@ -166,28 +166,28 @@ export OPENAI_API_KEY="your-api-key-here"
 
 ## Running Evals
 
-#### Run All Evals
+#### Run all evals
 ```bash
 python run_eval.py
 ```
 
-#### List Available Evals
+#### List available evals
 ```bash
 python run_eval.py --list
 ```
 
-#### Run Specific Eval
+#### Run specific eval
 ```bash
 python run_eval.py --name "Simple Taxon Name Fix"
 ```
 
-#### Run Evals by Pattern
+#### Run evals by pattern
 ```bash
 python run_eval.py --filter "redact"    # Run all redaction-related evaluations
 python run_eval.py --filter "name"      # Run all name-related evaluations
 ```
 
-#### Get Help
+#### Get help
 ```bash
 python run_eval.py --help
 ```
