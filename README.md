@@ -204,6 +204,9 @@ python run_eval.py --help
 
 ## Learn More
 
+
+
+
 ### About autoevals
 
  [autoevals](https://github.com/braintrustdata/autoevals) is a comprehensive library of evaluation metrics developed by Braintrust, used by companies like Anthropic, OpenAI, and others in production environments. It provides standardized, well-tested evaluation functions that make it easy to assess AI model performance:
@@ -217,10 +220,11 @@ python run_eval.py --help
 
 ### About spaCy
 
-[spaCy](https://spacy.io/) is an open-source Python library for fast, industrial-strength Natural Language Processing (NLP). While WildEval  uses spaCy for detecting and redacting place names in biodiversity data, it's a general-purpose NLP library capable of many text analysis tasks:
+[spaCy](https://spacy.io/) is an open-source Python library for fast, industrial-strength Natural Language Processing (NLP). WildEval uses spaCy in a very simple example to detect and redact place names in biodiversity text, it's just enough to demonstrate what's possible. While spaCy is great for general-purpose NLP, many biodiversity tasks will benefit more from domain-specific models, such as those available on [Hugging Face](https://huggingface.co/).
+
+spaCy provides tools like:
 
 - **Named Entity Recognition (NER)**: Detect people, organizations, locations, dates, etc.
-- **Part-of-speech tagging**: Identify nouns, verbs, adjectives, etc.
 - **Tokenization**: Split text into words, sentences, etc.
 - **Dependency parsing**: Understand grammatical relationships
 - **Text classification**: Categorize text content
@@ -231,6 +235,7 @@ In biodiversity data contexts, spaCy could help with tasks like:
 - Identifying geographic locations in observation records
 - Parsing taxonomic hierarchies
 - Analyzing field notes and descriptions
+
 
 ## License
 
