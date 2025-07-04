@@ -1,22 +1,4 @@
-from autoevals.string import Levenshtein as AELevenshtein
-# from autoevals.string import StringSimilarity as AEStringSimilarity
-
-
-
-
-class Levenshtein:
-    def __call__(self, output, expected):
-        result = AELevenshtein().eval(str(output), str(expected))      
-        if result.metadata:
-            return {
-                "score": result.score,
-                "metadata": result.metadata
-            }
-        else:
-            return {
-                "score": result.score
-            }
-            
+           
 
 class GazetteerMatchScorer:
     '''
